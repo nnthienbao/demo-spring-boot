@@ -5,23 +5,22 @@
  */
 package com.zalogroup.zte.demo.demospringboot.controller;
 
-import com.zalogroup.zte.demo.demospringboot.entity.Hello;
+import java.util.Map;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
  * @author cpu02453-local
  */
-@RestController
+@Controller
 public class HelloController {
 	@GetMapping(value = "hello")
-	@ResponseBody
-	public Hello getHello(@RequestParam(value = "name", defaultValue = "every body") String name) {
-		Hello hello = new Hello();
-		hello.setMessage(String.format("Hello %s", name));
-		return hello;
+	public String getHello(@RequestParam(value = "name", defaultValue = "every body") String name,
+			Map<String, Object> model
+			) {
+		model.put("name", name);
+		return "hello";
 	}
 }
